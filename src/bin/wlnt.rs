@@ -1,7 +1,6 @@
 use std::{
     fs::File,
     io::{BufReader, BufWriter, Cursor, Write},
-    path::Path,
     time::Instant,
 };
 use walnut::FS;
@@ -56,20 +55,12 @@ enum Commands {
 }
 
 fn main() {
-    let path = Path::new("demo/demo.db");
-
     let cli = Cli::parse();
-
-    // let mut fs = if path.exists() {
-    //     fs::FS::new(path, &cli.secret).unwrap()
-    // } else {
-    //     fs::FS::init(path, &cli.secret).unwrap()
-    // };
 
     match cli.command {
         Commands::Init => init(&cli.fs_path, &cli.secret),
         Commands::Fsinfo => {
-            let mut fs = FS::new(&cli.fs_path, &cli.secret).unwrap();
+            let fs = FS::new(&cli.fs_path, &cli.secret).unwrap();
             println!("{:?}", &fs.superblock)
         }
         Commands::Fileinfo { path, filename } => {
@@ -78,14 +69,14 @@ fn main() {
             println!("{:?}", &inode);
         }
         Commands::Ls { path } => {
-            let mut fs = FS::new(&cli.fs_path, &cli.secret).unwrap();
+            let fs = FS::new(&cli.fs_path, &cli.secret).unwrap();
             let (dir, _) = fs.find_directory(&path).unwrap();
             dir.files
                 .iter()
                 .for_each(|f| println!("{0: <20} | inode: {1}", f.0, f.1))
         }
         Commands::Lsdir => {
-            let mut fs = FS::new(&cli.fs_path, &cli.secret).unwrap();
+            let fs = FS::new(&cli.fs_path, &cli.secret).unwrap();
             let dirindex = fs.get_directory_index().unwrap();
             dirindex.directories().iter().for_each(|(dir, _index)| {
                 println!("{}", dir.to_string_lossy());
@@ -125,7 +116,13 @@ fn main() {
     }
 }
 
-fn add_file(fs_path: &str, secret: &str, file_path: &str, path: &str, file_name: &str) {
+fn add_file(
+    fs_path: &str,
+    secret: &str,
+    file_path: &str,
+    path: &str,
+    file_name: &str,
+) {
     let mut fs = FS::new(fs_path, secret).unwrap();
 
     let start = Instant::now();
@@ -157,7 +154,13 @@ fn print_file(fs_path: &str, secret: &str, path: &str, file_name: &str) {
     println!("{}", String::from_utf8_lossy(&d));
 }
 
-fn export(fs_path: &str, secret: &str, path: &str, file_name: &str, output: &str) {
+fn export(
+    fs_path: &str,
+    secret: &str,
+    path: &str,
+    file_name: &str,
+    output: &str,
+) {
     let mut fs = FS::new(fs_path, secret).unwrap();
 
     let start = Instant::now();
