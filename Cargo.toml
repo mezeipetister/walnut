@@ -4,7 +4,7 @@ authors = ["Peter Mezei <mezeipetister@gmail.com>"]
 description = "# Walnut File Systwm\nExperimental file system with inode level encryption."
 version = "0.1.5"
 edition = "2021"
-license = "GPL3"
+license = "GPL-3.0"
 homepage = "https://github.com/mezeipetister/walnut"
 repository = "https://github.com/mezeipetister/walnut"
 
