@@ -132,7 +132,10 @@ impl FS {
         Ok(directory_index)
     }
 
-    fn save_directory_index(&mut self, mut directory_index: DirectoryIndex) -> anyhow::Result<()> {
+    fn save_directory_index(
+        &mut self,
+        mut directory_index: DirectoryIndex,
+    ) -> anyhow::Result<()> {
         let mut inode = self.get_inode(ROOT_INODE_INDEX)?;
 
         // Set checksum
@@ -157,7 +160,11 @@ impl FS {
 
         self.save_inode(&mut directory_index_inode)?;
 
-        self.write_inode_data(&mut directory_index_inode, &mut r, di_data.len() as u64)?;
+        self.write_inode_data(
+            &mut directory_index_inode,
+            &mut r,
+            di_data.len() as u64,
+        )?;
 
         Ok(())
     }
@@ -208,7 +215,11 @@ impl FS {
         let data = bincode::serialize(&directory)?;
         let mut reader = Cursor::new(&data);
 
-        self.write_inode_data(&mut directory_inode, &mut reader, data.len() as u64)?;
+        self.write_inode_data(
+            &mut directory_inode,
+            &mut reader,
+            data.len() as u64,
+        )?;
 
         Ok(directory)
     }
@@ -232,7 +243,9 @@ impl FS {
 
         // Then try to add directory to dir index
         // If it fails, then free up allocated block
-        if let None = directory_index.create_dir(dir, directory_inode.block_index) {
+        if let None =
+            directory_index.create_dir(dir, directory_inode.block_index)
+        {
             self.release_inode(directory_inode.block_index)?;
         }
 
@@ -249,7 +262,11 @@ impl FS {
     /// Get file by dir and filename
     /// returns found file inode
     #[inline]
-    pub fn get_file_info<P>(&mut self, dir: P, file_name: &str) -> anyhow::Result<Inode>
+    pub fn get_file_info<P>(
+        &mut self,
+        dir: P,
+        file_name: &str,
+    ) -> anyhow::Result<Inode>
     where
         P: AsRef<Path>,
     {
@@ -284,18 +301,19 @@ impl FS {
         let (mut dir, dir_inode_index) = self.find_directory(dir)?;
 
         // Find file
-        let mut file_inode = if let Some(inode_block_index) = dir.get_file(file_name) {
-            self.get_inode(inode_block_index)?
-        } else {
-            let file_inode = self.allocate_inode().unwrap();
-            dir.add_file(file_name, file_inode.block_index)?;
-            self.save_directory(dir, dir_inode_index)?;
+        let mut file_inode =
+            if let Some(inode_block_index) = dir.get_file(file_name) {
+                self.get_inode(inode_block_index)?
+            } else {
+                let file_inode = self.allocate_inode().unwrap();
+                dir.add_file(file_name, file_inode.block_index)?;
+                self.save_directory(dir, dir_inode_index)?;
 
-            // Inc. file count
-            self.superblock_mut().file_count += 1;
+                // Inc. file count
+                self.superblock_mut().file_count += 1;
 
-            file_inode
-        };
+                file_inode
+            };
 
         self.write_inode_data(&mut file_inode, data, data_len)?;
 
@@ -306,20 +324,25 @@ impl FS {
     }
 
     #[inline]
-    pub fn remove_file(&mut self, dir: &str, file_name: &str) -> anyhow::Result<()> {
+    pub fn remove_file(
+        &mut self,
+        dir: &str,
+        file_name: &str,
+    ) -> anyhow::Result<()> {
         // Check if dir exist
         let (mut dir, dir_inode_index) = self.find_directory(dir)?;
 
         // Find file
-        let file_inode = if let Some(inode_block_index) = dir.get_file(file_name) {
-            if let Ok(inode) = self.get_inode(inode_block_index) {
-                inode
+        let file_inode =
+            if let Some(inode_block_index) = dir.get_file(file_name) {
+                if let Ok(inode) = self.get_inode(inode_block_index) {
+                    inode
+                } else {
+                    return Err(anyhow!("No file found in dir!"));
+                }
             } else {
-                return Err(anyhow!("No file found in dir!"));
-            }
-        } else {
-            return Err(anyhow!("Unknown directory!"));
-        };
+                return Err(anyhow!("Unknown directory!"));
+            };
 
         // Release inode
         self.release_inode(file_inode.block_index)?;
@@ -340,7 +363,12 @@ impl FS {
     /// Finds file by dir and filename
     /// And writes its content to the given writer
     #[inline]
-    pub fn get_file_data<P, W>(&mut self, dir: P, file_name: &str, w: &mut W) -> anyhow::Result<u32>
+    pub fn get_file_data<P, W>(
+        &mut self,
+        dir: P,
+        file_name: &str,
+        w: &mut W,
+    ) -> anyhow::Result<u32>
     where
         P: AsRef<Path>,
         W: Write,
@@ -349,12 +377,13 @@ impl FS {
         let (directory, _) = self.find_directory(dir)?;
 
         // Then find file
-        let mut file_inode = if let Some(file_inode_index) = directory.get_file(file_name) {
-            self.get_inode(file_inode_index)?
-        } else {
-            // Else return error
-            return Err(anyhow!("File not found"));
-        };
+        let mut file_inode =
+            if let Some(file_inode_index) = directory.get_file(file_name) {
+                self.get_inode(file_inode_index)?
+            } else {
+                // Else return error
+                return Err(anyhow!("File not found"));
+            };
 
         self.read_inode_data(&mut file_inode, w)
     }
@@ -421,7 +450,11 @@ impl FS {
     }
 
     #[inline]
-    fn save_group(&mut self, group: Group, group_index: u32) -> anyhow::Result<()> {
+    fn save_group(
+        &mut self,
+        group: Group,
+        group_index: u32,
+    ) -> anyhow::Result<()> {
         // Update group at FS
         self.groups[group_index as usize] = group.clone();
 
@@ -434,7 +467,11 @@ impl FS {
     }
 
     #[inline]
-    fn read_inode_data<W>(&self, inode: &mut Inode, w: &mut W) -> anyhow::Result<u32>
+    fn read_inode_data<W>(
+        &self,
+        inode: &mut Inode,
+        w: &mut W,
+    ) -> anyhow::Result<u32>
     where
         W: Write,
     {
@@ -447,26 +484,30 @@ impl FS {
                 encrypt(data, &self.lookup_table);
 
                 // Update checksum
-                checksum.update(&data);
+                checksum.update(data);
 
                 // Write data into writer
-                w.write_all(&data)?;
+                w.write_all(data)?;
             }
             Data::DirectPointers(pointers) => {
                 // Counting data left to read
                 let mut data_left = inode.size;
 
-                let mut block_buffer: Vec<u8> = Vec::with_capacity(BLOCK_SIZE as usize);
+                let mut block_buffer: Vec<u8> =
+                    Vec::with_capacity(BLOCK_SIZE as usize);
                 unsafe { block_buffer.set_len(BLOCK_SIZE as usize) };
 
                 for (block_index, range) in pointers {
                     // Seek start position
-                    r.seek(SeekFrom::Start(block_seek_position(*block_index) as u64))?;
+                    r.seek(SeekFrom::Start(
+                        block_seek_position(*block_index) as u64
+                    ))?;
 
                     for _ in *block_index..(*block_index + *range) {
                         // Determine if last block
                         if data_left < BLOCK_SIZE as u64 {
-                            block_buffer = Vec::with_capacity(data_left as usize);
+                            block_buffer =
+                                Vec::with_capacity(data_left as usize);
                             unsafe { block_buffer.set_len(data_left as usize) };
                         };
 
@@ -506,7 +547,9 @@ impl FS {
         // Release inode data
         match &inode.data {
             Data::Raw(_) => (),
-            Data::DirectPointers(pointers) => self.release_inode_data(pointers.clone())?,
+            Data::DirectPointers(pointers) => {
+                self.release_inode_data(pointers.clone())?
+            }
         }
 
         // If data length fits inside inode
@@ -545,7 +588,8 @@ impl FS {
 
         // Define block_to_allocate
         let blocks_to_allocate = |data_size| {
-            data_size / BLOCK_SIZE as u64 + u64::from(data_size % BLOCK_SIZE as u64 != 0)
+            data_size / BLOCK_SIZE as u64
+                + u64::from(data_size % BLOCK_SIZE as u64 != 0)
         };
 
         // Determine how many block we need
@@ -629,8 +673,9 @@ impl FS {
     #[inline]
     fn truncate(&mut self) -> anyhow::Result<()> {
         // Superblock + GroupCount * (Group bitmap + group data inodes)
-        let size =
-            BLOCK_SIZE + (self.groups.len() as u32) * (BLOCK_SIZE + BLOCKS_PER_GROUP * BLOCK_SIZE);
+        let size = BLOCK_SIZE
+            + (self.groups.len() as u32)
+                * (BLOCK_SIZE + BLOCKS_PER_GROUP * BLOCK_SIZE);
         // Set file size
         self.file.set_len(size as u64)?;
         // Return ok
@@ -646,7 +691,9 @@ impl FS {
 
         let mut res = None;
         for (group_index, group) in self.groups_mut().iter_mut().enumerate() {
-            if let Some(inode_block_index) = group.allocate_one(group_index as u32) {
+            if let Some(inode_block_index) =
+                group.allocate_one(group_index as u32)
+            {
                 let inode = Inode::new(inode_block_index);
                 res = Some(inode);
                 break;
@@ -691,15 +738,20 @@ impl FS {
     }
 
     #[inline]
-    fn release_inode_data(&mut self, data_pointers: Vec<(u32, u32)>) -> anyhow::Result<()> {
+    fn release_inode_data(
+        &mut self,
+        data_pointers: Vec<(u32, u32)>,
+    ) -> anyhow::Result<()> {
         let mut groups = self.groups_mut().as_mut().to_owned();
 
         // Check each data region
         for (block_index, range) in data_pointers {
             // Translate public address
-            let (group_index, bitmap_index) = Group::translate_public_address(block_index);
+            let (group_index, bitmap_index) =
+                Group::translate_public_address(block_index);
             // Release data region
-            groups[group_index as usize].release_data_region(bitmap_index, range);
+            groups[group_index as usize]
+                .release_data_region(bitmap_index, range);
         }
         // Iter groups
         for (group_index, group) in groups.into_iter().enumerate() {
@@ -717,14 +769,17 @@ impl FS {
         let inode = self.get_inode(inode_block_index)?;
 
         // Translate block index
-        let (group_index, bitmap_index) = Group::translate_public_address(inode_block_index);
+        let (group_index, bitmap_index) =
+            Group::translate_public_address(inode_block_index);
 
         // Release data
         match inode.data {
             // Dont do anything when it has raw data
             Data::Raw(_) => (),
             // Release all direct pointers
-            Data::DirectPointers(direct_pointers) => self.release_inode_data(direct_pointers)?,
+            Data::DirectPointers(direct_pointers) => {
+                self.release_inode_data(direct_pointers)?
+            }
         }
 
         let mut group = self.groups[group_index as usize].to_owned();
@@ -832,7 +887,8 @@ impl Group {
     }
 
     pub fn init() -> Self {
-        let mut block_bitmap = BitVec::<u8, Lsb0>::with_capacity(BLOCK_SIZE as usize * 8);
+        let mut block_bitmap =
+            BitVec::<u8, Lsb0>::with_capacity(BLOCK_SIZE as usize * 8);
         block_bitmap.resize(BLOCK_SIZE as usize * 8, false);
         Self { block_bitmap }
     }
@@ -841,7 +897,8 @@ impl Group {
     fn seek_position(group_index: u32) -> u32 {
         // Superblock BLOCK_SIZE (4kib)
         // + Group ID * (BLOCK_SIZE + BLOCKS_PER_GROUP * BLOCK_SIZE)
-        BLOCK_SIZE + (group_index * (BLOCK_SIZE + BLOCKS_PER_GROUP * BLOCK_SIZE))
+        BLOCK_SIZE
+            + (group_index * (BLOCK_SIZE + BLOCKS_PER_GROUP * BLOCK_SIZE))
     }
 
     #[inline]
@@ -875,7 +932,10 @@ impl Group {
     }
 
     #[inline]
-    pub fn deserialize_from<R>(mut r: R, group_index: u32) -> anyhow::Result<Group>
+    pub fn deserialize_from<R>(
+        mut r: R,
+        group_index: u32,
+    ) -> anyhow::Result<Group>
     where
         R: Read + Seek,
     {
@@ -978,7 +1038,10 @@ impl Group {
                 } else {
                     // Else we need to create a new opened region
                     region = Some((
-                        Self::create_public_address(group_index, bitmap_index as u32),
+                        Self::create_public_address(
+                            group_index,
+                            bitmap_index as u32,
+                        ),
                         1,
                     ));
                 }
@@ -1006,7 +1069,7 @@ impl Group {
             }
 
             // If last item, then clean up
-            if let None = iter.peek() {
+            if iter.peek().is_none() {
                 // If we have opened region
                 // then close it
                 if let Some(r) = region.take() {
@@ -1099,7 +1162,11 @@ impl Inode {
     }
 
     #[inline]
-    fn set_raw_data<R>(&mut self, data: &mut R, data_size: u64) -> anyhow::Result<()>
+    fn set_raw_data<R>(
+        &mut self,
+        data: &mut R,
+        data_size: u64,
+    ) -> anyhow::Result<()>
     where
         R: Read,
     {
@@ -1107,10 +1174,12 @@ impl Inode {
         let data_len = data.read_to_end(&mut buffer)?;
 
         if data_len != data_size as usize {
-            return Err(anyhow!("Data read and given data size are not the same"));
+            return Err(anyhow!(
+                "Data read and given data size are not the same"
+            ));
         }
 
-        if data_len > INODE_CAPACITY as usize {
+        if data_len > INODE_CAPACITY {
             return Err(anyhow!(
                 "Data is too big to be raw data. Does not fit inside inode"
             ));
@@ -1122,7 +1191,11 @@ impl Inode {
     }
 
     #[inline]
-    fn set_direct_pointers(&mut self, pointers: Vec<(u32, u32)>, data_size: u64) {
+    fn set_direct_pointers(
+        &mut self,
+        pointers: Vec<(u32, u32)>,
+        data_size: u64,
+    ) {
         self.data = Data::DirectPointers(pointers);
         self.size = data_size;
     }
@@ -1171,7 +1244,8 @@ impl DirectoryIndex {
             return Err(anyhow!("Target directory has already exist"));
         }
 
-        let dir_inode = self.directories.remove(from.as_ref().as_os_str()).unwrap();
+        let dir_inode =
+            self.directories.remove(from.as_ref().as_os_str()).unwrap();
 
         let _ = self
             .directories
@@ -1214,10 +1288,15 @@ impl Directory {
     }
 
     pub fn get_file(&self, file_name: &str) -> Option<u32> {
-        self.files.get(file_name).map(|x| *x)
+        // self.files.get(file_name).map(|x| *x)
+        self.files.get(file_name).copied()
     }
 
-    pub fn add_file(&mut self, file_name: &str, inode_block_index: u32) -> anyhow::Result<()> {
+    pub fn add_file(
+        &mut self,
+        file_name: &str,
+        inode_block_index: u32,
+    ) -> anyhow::Result<()> {
         match self.get_file(file_name) {
             Some(_) => Err(anyhow!("File already exist")),
             None => {
