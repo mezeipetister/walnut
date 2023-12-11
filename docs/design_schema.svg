@@ -23,9 +23,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="1.0109085"
-     inkscape:cx="282.91383"
-     inkscape:cy="557.91399"
+     inkscape:zoom="0.57981283"
+     inkscape:cx="68.98778"
+     inkscape:cy="582.94674"
      inkscape:window-width="1440"
      inkscape:window-height="900"
      inkscape:window-x="0"
@@ -35,6 +35,25 @@
      showgrid="false" />
   <defs
      id="defs1">
+    <marker
+       style="overflow:visible"
+       id="marker129"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path129" />
+    </marker>
     <marker
        style="overflow:visible"
        id="marker97"
@@ -1013,28 +1032,24 @@
          x="209.26566"
          y="116.79049"
          id="tspan84">4kib</tspan></text>
-    <g
-       id="g89"
-       transform="translate(56.928036)">
-      <rect
-         style="fill:#ffccaa;stroke:#808080;stroke-width:0.374626;stroke-dasharray:none"
-         id="rect84"
-         width="27.815845"
-         height="27.815845"
-         x="23.233595"
-         y="157.72755" />
-      <text
-         xml:space="preserve"
-         style="font-size:3.60397px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:center;text-anchor:middle;fill:#ffffff;stroke:#808080;stroke-width:0.612958;stroke-dasharray:none"
-         x="37.071129"
+    <rect
+       style="fill:#ffccaa;stroke:#808080;stroke-width:0.374626;stroke-dasharray:none"
+       id="rect84"
+       width="27.815845"
+       height="27.815845"
+       x="80.161629"
+       y="157.72755" />
+    <text
+       xml:space="preserve"
+       style="font-size:3.60397px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:center;text-anchor:middle;fill:#ffffff;stroke:#808080;stroke-width:0.612958;stroke-dasharray:none"
+       x="93.999168"
+       y="172.97905"
+       id="text87"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.60397px;font-family:Monospace;-inkscape-font-specification:Monospace;fill:#000000;stroke:none;stroke-width:0.612958"
+         x="93.999168"
          y="172.97905"
-         id="text87"><tspan
-           sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.60397px;font-family:Monospace;-inkscape-font-specification:Monospace;fill:#000000;stroke:none;stroke-width:0.612958"
-           x="37.071129"
-           y="172.97905"
-           id="tspan87">Inode</tspan></text>
-    </g>
+         id="tspan87">Inode</tspan></text>
     <rect
        style="fill:#f4d7d7;stroke:#808080;stroke-width:0.374626;stroke-dasharray:none"
        id="rect89"
@@ -1069,15 +1084,13 @@
        id="path94"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="0"
-       inkscape:connection-start="#rect61"
-       inkscape:connection-end="#g89" />
+       inkscape:connection-start="#rect61" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker97)"
        d="m 107.97748,169.42892 47.10099,-7.47278"
        id="path96"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="0"
-       inkscape:connection-start="#g89"
        inkscape:connection-end="#rect129" />
     <text
        xml:space="preserve"
@@ -1144,5 +1157,53 @@
          x="87.997795"
          y="144.63789"
          id="tspan113">Inode</tspan></text>
+    <g
+       id="g129"
+       transform="translate(21.740443,2.3839676)">
+      <rect
+         style="fill:#ff2a2a;stroke-width:9.22545"
+         id="rect115"
+         width="46.381454"
+         height="15.91187"
+         x="20.385048"
+         y="199.28651" />
+      <text
+         xml:space="preserve"
+         style="font-size:3.35139px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:center;text-anchor:middle;fill:#ffffff;stroke:#808080;stroke-width:0.569999;stroke-dasharray:none"
+         x="43.633049"
+         y="203.98679"
+         id="text117"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.35139px;font-family:Monospace;-inkscape-font-specification:Monospace;fill:#000000;stroke:none;stroke-width:0.569999"
+           x="43.633049"
+           y="203.98679"
+           id="tspan117">Each Data Block</tspan><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.35139px;font-family:Monospace;-inkscape-font-specification:Monospace;fill:#000000;stroke:none;stroke-width:0.569999"
+           x="43.633049"
+           y="208.17603"
+           id="tspan120">is encrypted using</tspan><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.35139px;font-family:Monospace;-inkscape-font-specification:Monospace;fill:#000000;stroke:none;stroke-width:0.569999"
+           x="43.633049"
+           y="212.36526"
+           id="tspan124">the provided secret</tspan></text>
+    </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker129)"
+       d="M 67.454791,202.66314 80.778694,185.5434"
+       id="path127"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-end="#rect84"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker129)"
+       d="M 65.592691,202.24477 53.328543,185.5434"
+       id="path128"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-end="#rect89"
+       sodipodi:nodetypes="cc" />
   </g>
 </svg>
