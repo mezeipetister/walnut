@@ -23,9 +23,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="1.1208506"
-     inkscape:cx="314.04721"
-     inkscape:cy="401.48081"
+     inkscape:zoom="1.0109085"
+     inkscape:cx="282.91383"
+     inkscape:cy="557.91399"
      inkscape:window-width="1440"
      inkscape:window-height="900"
      inkscape:window-x="0"
@@ -480,27 +480,6 @@
        x="220.87598"
        y="-19.246536"
        transform="rotate(45)" />
-    <text
-       xml:space="preserve"
-       style="font-size:3.35139px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:center;text-anchor:middle;fill:#ffffff;stroke:#808080;stroke-width:0.569999;stroke-dasharray:none"
-       x="169.7317"
-       y="156.6819"
-       id="text125"><tspan
-         sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.35139px;font-family:Monospace;-inkscape-font-specification:Monospace;fill:#000000;stroke:none;stroke-width:0.569999"
-         x="169.7317"
-         y="156.6819"
-         id="tspan125">if data</tspan><tspan
-         sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.35139px;font-family:Monospace;-inkscape-font-specification:Monospace;fill:#000000;stroke:none;stroke-width:0.569999"
-         x="169.7317"
-         y="160.87114"
-         id="tspan129">fits inside</tspan><tspan
-         sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.35139px;font-family:Monospace;-inkscape-font-specification:Monospace;fill:#000000;stroke:none;stroke-width:0.569999"
-         x="169.7317"
-         y="165.06038"
-         id="tspan130">4kib</tspan></text>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Triangle)"
        d="m 163.31712,170.19479 -13.15575,21.48166"
@@ -1104,23 +1083,23 @@
        xml:space="preserve"
        style="font-size:3.35139px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:center;text-anchor:middle;fill:#ffffff;stroke:#808080;stroke-width:0.569999;stroke-dasharray:none"
        x="169.7317"
-       y="156.6819"
+       y="156.35707"
        id="text99"><tspan
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.35139px;font-family:Monospace;-inkscape-font-specification:Monospace;fill:#000000;stroke:none;stroke-width:0.569999"
          x="169.7317"
-         y="156.6819"
-         id="tspan97">if data</tspan><tspan
+         y="156.35707"
+         id="tspan97">If data</tspan><tspan
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.35139px;font-family:Monospace;-inkscape-font-specification:Monospace;fill:#000000;stroke:none;stroke-width:0.569999"
          x="169.7317"
-         y="160.87114"
+         y="160.54631"
          id="tspan98">fits inside</tspan><tspan
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.35139px;font-family:Monospace;-inkscape-font-specification:Monospace;fill:#000000;stroke:none;stroke-width:0.569999"
          x="169.7317"
-         y="165.06038"
-         id="tspan99">4kib</tspan></text>
+         y="164.73555"
+         id="tspan99">4047 bytes</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:3.35139px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:center;text-anchor:middle;fill:#ffffff;stroke:#808080;stroke-width:0.569999;stroke-dasharray:none"
@@ -1136,7 +1115,7 @@
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.35139px;font-family:Monospace;-inkscape-font-specification:Monospace;fill:#000000;stroke:none;stroke-width:0.569999"
          x="41.24646"
          y="142.55228"
-         id="tspan104">can be</tspan><tspan
+         id="tspan104">could be a</tspan><tspan
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.35139px;font-family:Monospace;-inkscape-font-specification:Monospace;fill:#000000;stroke:none;stroke-width:0.569999"
          x="41.24646"
@@ -1159,11 +1138,11 @@
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.35139px;font-family:Monospace;-inkscape-font-specification:Monospace;fill:#000000;stroke:none;stroke-width:0.569999"
          x="87.997795"
          y="140.44865"
-         id="tspan112">Or it can be</tspan><tspan
+         id="tspan112">Or it could be</tspan><tspan
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.35139px;font-family:Monospace;-inkscape-font-specification:Monospace;fill:#000000;stroke:none;stroke-width:0.569999"
          x="87.997795"
          y="144.63789"
-         id="tspan113">an Inode</tspan></text>
+         id="tspan113">Inode</tspan></text>
   </g>
 </svg>
