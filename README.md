@@ -12,7 +12,7 @@ Key features:
 - directory management
 - easy api
 - CLI
-- auto scaling (only upwards)
+- auto data scaling (only upwards)
 
 FS design:
 
