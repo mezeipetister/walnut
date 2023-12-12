@@ -14,6 +14,11 @@ Key features:
 - CLI
 - auto data scaling (only upwards)
 
-FS design:
+*inspired by:*
+- https://en.wikipedia.org/wiki/Ext4
+- https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout
+- https://github.com/carlosgaldino/gotenksfs
+
+## FS design:
 
 <image src="docs/design_schema.svg" width="700" alt="Walnut file system">
