@@ -47,6 +47,6 @@ wlnt FS_PATH SECRET export PATH FILENAME EXPORT_PATH
 
 ## Encryption
 
-Walnut uses XOR (1) operation at bit level. Creating a 4kib lookup table from the given secret, and performing XOR between data és lookup table bits. We use lookup table to increase performance.
+Walnut uses XOR (1) operation at bit level. Creating a 4kib lookup table from the given secret, and performing XOR between data and lookup table bits. We use lookup table to increase performance.
 
 (1) https://en.wikipedia.org/wiki/Exclusive_or
